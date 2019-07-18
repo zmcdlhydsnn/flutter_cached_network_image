@@ -10,7 +10,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_cache_manager: "^1.1.0"
+  flutter_cache_manager:
+    git:
+      url: https://github.com/renefloor/flutter_cache_manager.git
+      ref: feature/return-error-as-fileinfo
+
 
 dev_dependencies:
   test: ^1.3.0

@@ -256,7 +256,7 @@ class CachedNetworkImageState extends State<CachedNetworkImage>
     );
   }
 
-  FileInfo _getFromMemory(){
+  FileInfo _getFromMemory() {
     return _cacheManager().getFileFromMemory(widget.imageUrl);
   }
 
@@ -272,10 +272,11 @@ class CachedNetworkImageState extends State<CachedNetworkImage>
               f?.originalUrl != fromMemory?.originalUrl ||
               f?.validTill != fromMemory?.validTill),
       builder: (BuildContext context, AsyncSnapshot<FileInfo> snapshot) {
-        if (snapshot.hasError) {
+        if (snapshot.hasError || (snapshot.data?.hasError ?? false)) {
           // error
           if (_imageHolders.length == 0 || _imageHolders.last.error == null) {
-            _addImage(image: null, error: snapshot.error);
+            _addImage(
+                image: null, error: snapshot.error ?? snapshot.data.error);
           }
         } else {
           var fileInfo = snapshot.data;
